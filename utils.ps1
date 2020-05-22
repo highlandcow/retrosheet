@@ -1,5 +1,5 @@
 # Run BEVENT.EXE against all files in a dir
-Get-ChildItem -File | Foreach {.\BEVENT.EXE $_ -y 1979 -f 0-96 > C:\Retrosheet\1979eve\$_.CSV}
+Get-ChildItem -File | Foreach {.\BEVENT.EXE -y 2019 -f 0-96 $_ > C:\data\Retrosheet\2019eve\$_.CSV}
 
 <# BEVENT fields:
 
