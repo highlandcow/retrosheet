@@ -103,3 +103,23 @@ getBaseStealers <- function(stealsData) {
                     unique(as.character(unique(stealsData$STOLE_3B_ID))))
   return(baseStealers[baseStealers != "NA"])
 }
+
+sumStealsDetailedAll <- function(stealsData, players) {
+  # Summarize stolen bases (count of steals of 2nd, 3rd, home; total steals) for a set of players. 
+  i = 1
+  playerID <- vector()
+  stole2B <- vector()
+  stole3B <- vector()
+  stoleH <- vector()
+  total_steals <- vector()
+  allThefts <- data.frame(PLAYER_ID=playerID, STOLE_2B=stole2B, 
+                          STOLE_3B=stole3B, STOLE_H=stoleH, 
+                          TOTAL_STEALS=total_steals, stringsAsFactors = FALSE)
+
+  while ( i < length(players) ) {
+    allThefts[i,] <- sumStealsDetailed(stealData, as.character(players[i]))
+    i <- i + 1
+  }
+  
+  return(allThefts)
+}
