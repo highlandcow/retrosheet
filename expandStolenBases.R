@@ -93,7 +93,7 @@ sumStealsDetailed <- function(stealsData, playerID) {
   stole3B <- nrow(stealsData[stealsData$STOLE_3B_ID == playerID, ])
   stoleH <- nrow(stealsData[stealsData$STOLE_H_ID == playerID, ])
   totalSteals <- sum(stole2B, stole3B, stoleH)
-  steals <- data.frame(STOLE_2B=stole2B, STOLE_3B=stole3B, STOLE_H=stoleH, TOTAL_STEALS=totalSteals)
+  steals <- data.frame(PLAYER_ID=playerID, STOLE_2B=stole2B, STOLE_3B=stole3B, STOLE_H=stoleH, TOTAL_STEALS=totalSteals)
   return(steals)
 }
 
