@@ -99,8 +99,8 @@ sumStealsDetailed <- function(stealsData, playerID) {
 
 getBaseStealers <- function(stealsData) {
   # Returns vector of players who stole at least one base
-  baseStealers <- c(unique(as.character(unique(stealsData$STOLE_2B_ID))), 
-                    unique(as.character(unique(stealsData$STOLE_3B_ID))))
+  baseStealers <- c(unique(unique(as.character(unique(stealsData$STOLE_2B_ID))), 
+                    unique(as.character(unique(stealsData$STOLE_3B_ID)))))
   return(baseStealers[baseStealers != "NA"])
 }
 
