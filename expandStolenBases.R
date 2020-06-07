@@ -13,8 +13,8 @@ expandStolenBases <- function(eventData) {
   isDoubleSteal <- function() {
     return(
       (grepl("SB2", events[i,]$EVENT_TX) && grepl("SB3", events[i,]$EVENT_TX)) | 
-        (grepl("SB2", events[i,]$EVENT_TX) && grepl("SB4", events[i,]$EVENT_TX)) | 
-        (grepl("SB3", events[i,]$EVENT_TX) && grepl("SB4", events[i,]$EVENT_TX)) 
+        (grepl("SB2", events[i,]$EVENT_TX) && grepl("SBH", events[i,]$EVENT_TX)) | 
+        (grepl("SB3", events[i,]$EVENT_TX) && grepl("SBH", events[i,]$EVENT_TX)) 
     )
   }
   
@@ -26,14 +26,14 @@ expandStolenBases <- function(eventData) {
       steal_3B[i] <- as.character(events[i, ]$BASE2_RUN_ID)
       steal_H[i] <- "NA"
     }
-    if ( grepl("SB3", events[i,]$EVENT_TX) && grepl("SB4", events[i,]$EVENT_TX) ) {
+    if ( grepl("SB3", events[i,]$EVENT_TX) && grepl("SBH", events[i,]$EVENT_TX) ) {
       # Third and home were stolen
       base_stolen[i] <- "3B+H"
       steal_2B[i] <- "NA"
       steal_3B[i] <- as.character(events[i, ]$BASE2_RUN_ID)
       steal_H[i] <- as.character(events[i, ]$BASE3_RUN_ID)
     }
-    if ( grepl("SB2", events[i,]$EVENT_TX) && grepl("SB4", events[i,]$EVENT_TX) ) {
+    if ( grepl("SB2", events[i,]$EVENT_TX) && grepl("SBH", events[i,]$EVENT_TX) ) {
       # Second and home were stolen
       base_stolen[i] <- "2B+H"
       steal_2B[i] <- as.character(events[i, ]$BASE1_RUN_ID)
@@ -54,7 +54,7 @@ expandStolenBases <- function(eventData) {
       steal_3B[i] <- as.character(events[i,]$BASE2_RUN_ID)
       steal_H[i] <- "NA"
     } 
-    if ( grepl("SB4", events[i,]$EVENT_TX)
+    if ( grepl("SBH", events[i,]$EVENT_TX)
          && (isDoubleSteal() == FALSE)) {
       base_stolen[i] <- "H"
       steal_2B[i] <- "NA"
@@ -63,7 +63,8 @@ expandStolenBases <- function(eventData) {
     } 
     if ( ( grepl("SB2", events[i,]$EVENT_TX) | 
            grepl("SB3", events[i,]$EVENT_TX) | 
-           grepl("SB4", events[i,]$EVENT_TX) ) == FALSE ) {
+           grepl("SBH", events[i,]$EVENT_TX) ) == FALSE ) {
+      # No base was stolen
       base_stolen[i] <- "NONE"
       steal_2B[i] <- "NA"
       steal_3B[i] <- "NA"
@@ -77,7 +78,6 @@ expandStolenBases <- function(eventData) {
                        STOLE_H_ID=steal_H)
   return(steals)
 }
-
 
 
 sumSteals <- function(stealsData, playerID) {
