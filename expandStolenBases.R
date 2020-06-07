@@ -116,7 +116,7 @@ sumStealsDetailedAll <- function(stealsData, players) {
                           STOLE_3B=stole3B, STOLE_H=stoleH, 
                           TOTAL_STEALS=total_steals, stringsAsFactors = FALSE)
 
-  while ( i < length(players) ) {
+  while ( i <= length(players) ) {
     allThefts[i,] <- sumStealsDetailed(stealData, as.character(players[i]))
     i <- i + 1
   }
