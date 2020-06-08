@@ -123,3 +123,10 @@ sumStealsDetailedAll <- function(stealsData, players) {
   
   return(allThefts)
 }
+
+getPlayerSteals <- function(stealsData, playerID) {
+  steals <- stealsData[stealsData$STOLE_2B_ID == playerID | 
+                         stealsData$STOLE_3B_ID == playerID | 
+                         stealsData$STOLE_H_ID == playerID, ]
+  return(steals)
+}
