@@ -65,7 +65,7 @@ expandStolenBases <- function(eventData) {
            grepl("SB3", events[i,]$EVENT_TX) | 
            grepl("SBH", events[i,]$EVENT_TX) ) == FALSE ) {
       # No base was stolen
-      base_stolen[i] <- "NONE"
+      base_stolen[i] <- "NA"
       steal_2B[i] <- "NA"
       steal_3B[i] <- "NA"
       steal_H[i] <- "NA"
