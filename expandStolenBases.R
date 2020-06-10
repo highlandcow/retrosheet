@@ -24,10 +24,11 @@ head(steals1998[steals1998$BASE_STOLEN != 'NONE', ])
 # stolen bases. Several useful functions are included in this file to explore the data. 
 
 # Example 1 - View plays in which second and home were stolen
-steals1998[steals1998$BASE_STOLEN == '2B+H', ]
+events1998sb <- cbind(events1998, steals1998)
+events1998sb[events1998sb$BASE_STOLEN == '2B+H', ]
 
 # Example 2 - View plays featuring a "straight steal" of home
-steals1998[steals1998$BASE_STOLEN == 'H', ]
+events1998sb[events1998sb$BASE_STOLEN == 'H', ]
 
 # Example 3 - View plays in which Rickey Henderson stole a base
 getPlayerSteals(steals1998, 'hendr001')
