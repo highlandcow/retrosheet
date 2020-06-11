@@ -144,7 +144,8 @@ expandStolenBases <- function(eventData) {
 sumSteals <- function(stealsData, playerID) {
   # Returns the total number of steals by a player
   return(nrow(stealsData[stealsData$STOLE_2B_ID == playerID, ]) +
-           nrow(stealsData[stealsData$STOLE_3B_ID == playerID, ]))
+           nrow(stealsData[stealsData$STOLE_3B_ID == playerID, ])+
+           nrow(stealsData[stealsData$STOLE_H_ID == playerID, ]))
 }
 
 sumStealsDetailed <- function(stealsData, playerID) {
