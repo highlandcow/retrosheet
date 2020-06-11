@@ -150,7 +150,6 @@ sumSteals <- function(stealsData, playerID) {
 
 sumStealsDetailed <- function(stealsData, playerID) {
   # Returns data frame showing number of steals of each base and the total number of steals for a given player
-  playerSteals <- (subset(stealData, stealData$STOLE_2B_ID == playerID | stealData$STOLE_3B_ID == playerID ,))
   stole2B <- nrow(stealsData[stealsData$STOLE_2B_ID == playerID, ])
   stole3B <- nrow(stealsData[stealsData$STOLE_3B_ID == playerID, ])
   stoleH <- nrow(stealsData[stealsData$STOLE_H_ID == playerID, ])
