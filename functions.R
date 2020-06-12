@@ -1,6 +1,17 @@
 # Returns events with a given player on base
-findPlayerOnBase <- function(annualData, playerID) {
-  playerOnBase <- subset(annualData, BASE1_RUN_ID == playerID | BASE2_RUN_ID == playerID | BASE3_RUN_ID == playerID )
+findPlayerOnBase <- function(eventData, playerID) {
+  playerOn1 <- eventData[eventData$BASE1_RUN_ID == playerID,]
+  playerOn2 <- eventData[eventData$BASE2_RUN_ID == playerID,]
+  playerOn3 <- eventData[eventData$BASE3_RUN_ID == playerID,]
+  playerOnBase <- rbind(playerOn1, playerOn2, playerOn3)
+  return(playerOnBase)
+}
+
+findPlayerOnBase <- function(eventData, playerID) {
+  playerOn1 <- eventData[eventData$BASE1_RUN_ID == playerID,]
+  playerOn2 <- eventData[eventData$BASE2_RUN_ID == playerID,]
+  playerOn3 <- eventData[eventData$BASE3_RUN_ID == playerID,]
+  playerOnBase <- rbind(playerOn1, playerOn2, playerOn3)
   return(playerOnBase)
 }
 
