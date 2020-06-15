@@ -7,23 +7,55 @@ expandCaughtStealing <- function(eventData) {
   caught_attempt3B <- vector()
   caught_attemptH <- vector()
   events <- eventData
-
+  
+  isDoubleCS <- function() {
+    return(
+      (grepl("CS2", events[i,]$EVENT_TX) && grepl("CS3", events[i,]$EVENT_TX)) |
+        (grepl("CS2", events[i,]$EVENT_TX) && grepl("CSH", events[i,]$EVENT_TX)) |
+        (grepl("CS3", events[i,]$EVENT_TX) && grepl("CSH", events[i,]$EVENT_TX)) 
+    )
+  }
+  
   while ( i <= nrow(events)) {
-    if ( grepl("CS2", events[i,]$EVENT_TX) ) {
+    if ( grepl("CS2", events[i,]$EVENT_TX) && grepl("CS3", events[i,]$EVENT_TX) ) {
+      # Runners were caught attempting to steal second and third
+      sb_base_attempted[i] <- "2B+H"
+      caught_attempt2B[i] <- as.character(events[i,]$BASE1_RUN_ID)
+      caught_attempt3B[i] <- as.character(events[i,]$BASE2_RUN_ID)
+      caught_attemptH[i] <- "NA"
+    }
+    if ( grepl("CS2", events[i,]$EVENT_TX) && grepl("CSH", events[i,]$EVENT_TX) ) {
+      # Runners were caught attempting to steal second and home
+      sb_base_attempted[i] <- "2B+H"
+      caught_attempt2B[i] <- as.character(events[i,]$BASE1_RUN_ID)
+      caught_attempt3B[i] <- as.character(events[i,]$BASE2_RUN_ID)
+      caught_attemptH[i] <- "NA"
+    }
+    if ( grepl("CS3", events[i,]$EVENT_TX) && grepl("CSH", events[i,]$EVENT_TX) ) {
+      # Runners were caught attempting to s teal third and home
+      sb_base_attempted[i] <- "3B+H"
+      caught_attempt2B[i] <- "NA"
+      caught_attempt3B[i] <- as.character(events[i,]$BASE2_RUN_ID)
+      caught_attemptH[i] <- as.character(events[i,]$BASE3_RUN_ID)
+    }
+    if ( grepl("CS2", events[i,]$EVENT_TX)
+         && (isDoubleCS() == FALSE)) {
       # Runner on 1st was thrown out attempting to steal 2nd
       sb_base_attempted[i] <- "2B"
       caught_attempt2B[i] <- as.character(events[i,]$BASE1_RUN_ID)
       caught_attempt3B[i] <- "NA"
       caught_attemptH[i] <- "NA"
     } 
-    if ( grepl("CS3", events[i,]$EVENT_TX) ) {
+    if ( grepl("CS3", events[i,]$EVENT_TX)
+         && (isDoubleCS() == FALSE)) {
       # Runner on 2nd was thrown out attempting to steal 3rd
       sb_base_attempted[i] <- "3B"
       caught_attempt2B[i] <- "NA"
       caught_attempt3B[i] <- as.character(events[i,]$BASE2_RUN_ID)
       caught_attemptH[i] <- "NA"
     } 
-    if ( grepl("CSH", events[i,]$EVENT_TX) ) {
+    if ( grepl("CSH", events[i,]$EVENT_TX)
+         && (isDoubleCS() == FALSE)) {
       # Runner on 3rd was thrown out attempting to steal home
       sb_base_attempted[i] <- "H"
       caught_attempt2B[i] <- "NA"
@@ -41,11 +73,11 @@ expandCaughtStealing <- function(eventData) {
     }
     i <- i+1
   }
-  steals <- data.frame(SB_BASE_ATTEMPTED=sb_base_attempted,
+  caught_steals <- data.frame(SB_BASE_ATTEMPTED=sb_base_attempted,
                        CS_ATTEMPT_2B=caught_attempt2B, 
                        CS_ATTEMPT_3B=caught_attempt3B, 
                        CS_ATTEMPT_H=caught_attemptH)
-  return(steals)
+  return(caught_steals)
 }
 
 
