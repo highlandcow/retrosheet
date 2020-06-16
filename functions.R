@@ -1,3 +1,5 @@
+
+# BASE RUNNING
 # Returns events with a given player on base
 findPlayerOnBase <- function(eventData, playerID) {
   playerOn1 <- eventData[eventData$BASE1_RUN_ID == playerID,]
@@ -6,6 +8,15 @@ findPlayerOnBase <- function(eventData, playerID) {
   playerOnBase <- rbind(playerOn1, playerOn2, playerOn3)
   return(playerOnBase)
 }
+
+getUniqueRunners <- function(eventData) {
+  runners <- as.character(events1998$BASE1_RUN_ID)
+  runners <- as.character(events1998$BASE2_RUN_ID)
+  runners <- as.character(events1998$BASE3_RUN_ID)
+  return(unique(runners))
+}
+
+
 
 # Collect a team's home and away games (don't use for aggregate team data...)
 getTeamGames <- function(teamID, eventData) {
