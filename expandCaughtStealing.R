@@ -135,7 +135,3 @@ getCaughtStealers <- function(csData) {
                    )
   return(unique(allCaughtStealers))
 }
-
-# TODO: Need to handle combinations of caught stealing events. 
-# For example, klasd001 and beniy001 HOU199807040: CSH(2);CS2(234)/DP
-# This is currently capturing klasd001's CS_ATTEMPT_2B and then overwriting it with beniy001's CS_ATTEMPT_H
