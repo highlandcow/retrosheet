@@ -13,7 +13,7 @@ getUniqueRunners <- function(eventData) {
   runners <- as.character(events1998$BASE1_RUN_ID)
   runners <- as.character(events1998$BASE2_RUN_ID)
   runners <- as.character(events1998$BASE3_RUN_ID)
-  return(unique(runners))
+  return(unique(runners[runners != '']))
 }
 
 
