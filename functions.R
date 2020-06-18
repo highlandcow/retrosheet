@@ -10,10 +10,28 @@ findPlayerOnBase <- function(eventData, playerID) {
 }
 
 getUniqueRunners <- function(eventData) {
-  runners <- as.character(events1998$BASE1_RUN_ID)
-  runners <- as.character(events1998$BASE2_RUN_ID)
-  runners <- as.character(events1998$BASE3_RUN_ID)
+  runners <- as.character(eventData$BASE1_RUN_ID)
+  runners <- as.character(eventData$BASE2_RUN_ID)
+  runners <- as.character(eventData$BASE3_RUN_ID)
   return(unique(runners[runners != '']))
+}
+
+
+# Expand Game Info
+
+expandGameInfo <- function (eventData) {
+  # Returns data frame with HOME_TEAM, DATE, and GAME_NUM as variables. 
+  home_teams <- substring(eventData$GAME_ID,0,3)
+  date <- as.Date(substring(eventData$GAME_ID,4,11),"%Y%m%d")
+  game_num <- substring(eventData$GAME_ID,12)
+  
+  gameInfo <- data.frame(
+    HOME_TEAM_ID = home_teams,
+    DATE = date,
+    GAME_NUMBER = game_num
+  )
+  
+  return(gameInfo)
 }
 
 
