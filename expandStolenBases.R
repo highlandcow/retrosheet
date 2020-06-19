@@ -1,3 +1,5 @@
+# TODO: Vectorization much? :)
+
 # expandStolenBases() uses Retrosheet play-by-play data to produce a data frame containing details
 # for any stolen base occuring during an event. Specifically, expandStolenBases() parses the EVENT_TX 
 # value for each event and determines if a stolen base occurred. If a stolen base occurred, the
