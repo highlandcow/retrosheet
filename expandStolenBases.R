@@ -7,3 +7,10 @@ steals_expanded <- data.frame(STOLE_2B=stole_2B, STOLE_3B=stole_3B, STOLE_H=stol
 num_SB_2B <- length(stole_2B[stole_2B != ''])
 num_SB_3B <- length(stole_3B[stole_3B != ''])
 num_SB_H <- length(stole_H[stole_H != ''])
+
+
+sumPlayerSteals <- function(retroID) {
+  return(length(steals_expanded[stole_2B=='jeted001',"STOLE_2B"])
+         +length(steals_expanded[stole_3B=='jeted001',"STOLE_3B"])
+         +length(steals_expanded[stole_H=='jeted001',"STOLE_H"]))
+}
