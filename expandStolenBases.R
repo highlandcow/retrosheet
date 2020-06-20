@@ -1,19 +1,19 @@
 expandStolenBases <- function(eventData) {
   #' Returns data frame with variables STOLE_2B, STOLE_3B, STOLE_H
-  events <- events1998[,"EVENT_TX"]
-  stole_2B <- ifelse(grepl("SB2", events), as.character(events1998[,"BASE1_RUN_ID"]), '')
-  stole_3B <- ifelse(grepl("SB3", events), as.character(events1998[,"BASE2_RUN_ID"]), '')
-  stole_H <- ifelse(grepl("SBH", events), as.character(events1998[,"BASE3_RUN_ID"]), '')
+  events <- eventData[,"EVENT_TX"]
+  stole_2B <- ifelse(grepl("SB2", events), as.character(eventData[,"BASE1_RUN_ID"]), '')
+  stole_3B <- ifelse(grepl("SB3", events), as.character(eventData[,"BASE2_RUN_ID"]), '')
+  stole_H <- ifelse(grepl("SBH", events), as.character(eventData[,"BASE3_RUN_ID"]), '')
   steals_expanded <- data.frame(STOLE_2B=stole_2B, STOLE_3B=stole_3B, STOLE_H=stole_H)
   return(steals_expanded)
 }
 
 expandCaughtStealing <- function(eventData) {
   #' Returns data frame with variables CAUGHT_2B, CAUGHT_3B, CAUGHT_H
-  events <- events1998[,"EVENT_TX"]
-  caught_2B <- ifelse(grepl("CS2", events), as.character(events1998[,"BASE1_RUN_ID"]), '')
-  caught_3B <- ifelse(grepl("CS3", events), as.character(events1998[,"BASE2_RUN_ID"]), '')
-  caught_H <- ifelse(grepl("CSH", events), as.character(events1998[,"BASE3_RUN_ID"]), '')
+  events <- eventData[,"EVENT_TX"]
+  caught_2B <- ifelse(grepl("CS2", events), as.character(eventData[,"BASE1_RUN_ID"]), '')
+  caught_3B <- ifelse(grepl("CS3", events), as.character(eventData[,"BASE2_RUN_ID"]), '')
+  caught_H <- ifelse(grepl("CSH", events), as.character(eventData[,"BASE3_RUN_ID"]), '')
   cs_expanded <- data.frame(CAUGHT_2B=caught_2B, CAUGHT_3B=caught_3B, CAUGHT_H=caught_H)
   return(cs_expanded)
 }
