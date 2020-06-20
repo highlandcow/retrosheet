@@ -8,6 +8,18 @@ expandStolenBases <- function(eventData) {
   return(steals_expanded)
 }
 
+expandCaughtStealing <- function(eventData) {
+  #' Returns data frame with variables CAUGHT_2B, CAUGHT_3B, CAUGHT_H
+  events <- events1998[,"EVENT_TX"]
+  caught_2B <- ifelse(grepl("CS2", events), as.character(events1998[,"BASE1_RUN_ID"]), '')
+  caught_3B <- ifelse(grepl("CS3", events), as.character(events1998[,"BASE2_RUN_ID"]), '')
+  caught_H <- ifelse(grepl("CSH", events), as.character(events1998[,"BASE3_RUN_ID"]), '')
+  cs_expanded <- data.frame(CAUGHT_2B=caught_2B, CAUGHT_3B=caught_3B, CAUGHT_H=caught_H)
+  return(cs_expanded)
+}
+
+### 
+
 sumPlayerSteals <- function(stealsData, retroID) {
   #' Returns total number of steals by a player
   return(length(stealsData[stole_2B==retroID,"STOLE_2B"])
