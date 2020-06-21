@@ -46,7 +46,7 @@ summarizePlayerSteals <- function(eventData, playerID) {
   attempts_2b <- sum(stole_2b, caught_2b)
   attempts_3b <- sum(stole_3b, caught_3b)
   attempts_h <- sum(stole_h, caught_h)
-  attempts_total = sum(attempts_2b, attempts_3b, attempts_h)
+  attempts_total <- sum(attempts_2b, attempts_3b, attempts_h)
   
   steal_digest <- data.frame(TOTAL_STEALS=stole_total,STOLE_2B=stole_2b,
                              STOLE_3B=stole_3b, STOLE_H=stole_h)
