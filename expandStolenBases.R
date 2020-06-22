@@ -1,3 +1,5 @@
+### Functions to expand variables describing SB and CS events
+
 expandStolenBases <- function(eventData) {
   #' Returns data frame with variables STOLE_2B, STOLE_3B, STOLE_H
   events <- eventData[,"EVENT_TX"]
@@ -17,6 +19,17 @@ expandCaughtStealing <- function(eventData) {
   cs_expanded <- data.frame(CAUGHT_2B=caught_2B, CAUGHT_3B=caught_3B, CAUGHT_H=caught_H)
   return(cs_expanded)
 }
+
+### Functions to expand variables describing players on the basepaths 
+
+expandNumRunners <- function(eventData) {
+  #' Returns vector with numbers of runners on during a play
+  events <- eventData[, c("BASE1_RUN_ID", "BASE2_RUN_ID", "BASE3_RUN_ID")]
+  runnersOn <- (eventData$BASE1_RUN_ID != "") + (eventData$BASE2_RUN_ID != "") + (eventData$BASE3_RUN_ID != "")
+  return(runnersOn)
+}
+
+
 
 ### 
 
