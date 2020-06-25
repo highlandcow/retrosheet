@@ -12,3 +12,10 @@ expandGameInfo <- function (eventData) {
   
   return(gameInfo)
 }
+
+###
+
+# Collect plays from a team's home and away games
+getTeamGames <- function(teamID, eventData) {
+  eventData[substr(eventData$GAME_ID, 1, 3) == teamID  | eventData$AWAY_TEAM_ID == teamID, ]
+}
